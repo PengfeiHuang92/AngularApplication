@@ -14,4 +14,15 @@ export class MenuComponent  {
     //Pros: We donot need to manuly change the code if we dicide to add paramters to the menuServices services
      this.friedRice = menuS.getMenu();
    }
+   //event handling 
+   enterClicked(){console.log("Enter was clicked")};
+
+   isActive = false;
+   onChange(){
+     if(this.isActive == false) {this.isActive = true;}
+     else{
+      this.isActive=false;
+     } 
+    
+   }
 }

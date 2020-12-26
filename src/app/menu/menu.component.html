@@ -7,5 +7,12 @@
         {{fr}}
     </li>
 </ul>
-
+<input (keyup.enter)="enterClicked()" style="margin-right:10px"/> <!--Event binding -->
+<!--Setting the button style as btn-primary from bootstrap.css. 
+    Style binding: setting the button background to yellow if 'isActive' is true otherwise blue.  
+    Event binding: calling 'onChange' function when button is clicked
+-->
+<button class="btn btn-primary" [style.backgroundColor]="isActive ? 'yellow':'blue'" (click)="onChange()">
+    Change
+</button>
 <!--shotcut 'ul>li' and press tab-->
