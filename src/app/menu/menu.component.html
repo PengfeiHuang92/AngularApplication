@@ -7,7 +7,19 @@
         {{fr}}
     </li>
 </ul>
-<input (keyup.enter)="enterClicked()" style="margin-right:10px"/> <!--Event binding -->
+<!--Event binding 
+    enterClicked function only be called when enter key is pressed
+    Template Variables: #name.value gets the value of the input field
+-->
+<input #name (keyup.enter)="enterClicked(name.value)" style="margin-right:10px"/> 
+
+<!-- Two way binding
+     import @angular/forms as FormsModule into 'app.module.ts' as 'import { FormsModule} from '@angular/forms';'
+     adding FormsModule into 'imports[]' as 'imports['xxxx','xxxxx','FormsModule']'
+     Pros: avoiding passing value by function. and shotter our code.
+-->>
+<input [(ngModel)]="email" (keyup.enter)="enterClickedTwoWayBinding()" style="margin-right:10px"/> 
+
 <!--Setting the button style as btn-primary from bootstrap.css. 
     Style binding: setting the button background to yellow if 'isActive' is true otherwise blue.  
     Event binding: calling 'onChange' function when button is clicked
