@@ -1,7 +1,22 @@
 <p>This is Menu html </p>
-<h2>{{title}}</h2>
 
+<p>Enter your Title</p>
+<input typu = "text" [(ngModel)] = "title" >
+<!--
+    Created a custom pipe:
+        command : 'ng g p title-case'
+        return: 'title-case.pipe.spect.ts' and 'title-case.pipe.ts' 
 
+    titleCase pipe will format the title into a title case.
+-->
+<h2>{{title | titleCase}} </h2>  
+
+<!--
+    shotcut 'ul>li' and press tab
+
+    * tells the Html that ngFor is a angular directive
+    *ng= "let item of array"
+-->
 <ul>
     <li *ngFor="let fr of friedRice">
         {{fr}}
@@ -17,7 +32,7 @@
      import @angular/forms as FormsModule into 'app.module.ts' as 'import { FormsModule} from '@angular/forms';'
      adding FormsModule into 'imports[]' as 'imports['xxxx','xxxxx','FormsModule']'
      Pros: avoiding passing value by function. and shotter our code.
--->>
+-->
 <input [(ngModel)]="email" (keyup.enter)="enterClickedTwoWayBinding()" style="margin-right:10px"/> 
 
 <!--Setting the button style as btn-primary from bootstrap.css. 
@@ -27,4 +42,5 @@
 <button class="btn btn-primary" [style.backgroundColor]="isActive ? 'yellow':'blue'" (click)="onChange()">
     Change
 </button>
-<!--shotcut 'ul>li' and press tab-->
+
+

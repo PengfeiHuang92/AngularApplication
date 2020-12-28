@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 })
 
 export class MenuComponent  {
-   title =  'Hello Angular!';
+   title = "";
    friedRice;
    isActive = false; //used for event handling
    email = "" ; //used for two-way binding
@@ -17,13 +17,13 @@ export class MenuComponent  {
     //Pros: We donot need to manuly change the code if we dicide to add paramters to the menuServices services
      this.friedRice = menuS.getMenu();
    }
+ 
 
-   //event handling 
+   //Event handling 
    enterClicked(value:string){console.log(value)};
 
-   enterClickedTwoWayBinding(){
-     console.log(this.email);
-   }
+   enterClickedTwoWayBinding(){console.log(this.email);}
+
    onChange(){
     //  if(this.isActive == false) {this.isActive = true;}
     //  else{
