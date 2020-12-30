@@ -1,46 +1,141 @@
-<p>This is Menu html </p>
+<html>
 
-<p>Enter your Title</p>
-<input typu = "text" [(ngModel)] = "title" >
-<!--
-    Created a custom pipe:
-        command : 'ng g p title-case'
-        return: 'title-case.pipe.spect.ts' and 'title-case.pipe.ts' 
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+    <!--
+        using class binding, event binding, and bootstrap library to show the star icon
+        by clicking start icon, it shows different icon classes
+    -->
+    <p>This is Menu html 
+        <span class="glyphicon" 
+        [class.glyphicon-star]= "!isActive" 
+        [class.glyphicon-star-empty] = "isActive"
+        (click) = "onChange()"></span>
+    <!--
+        ngClass: shoter our code
+    -->
+        <span class="glyphicon" 
+        [ngClass]="{
+            'glyphicon-remove-sign':!isActive,
+            'glyphicon-ok-sign':isActive
+        }"
+        (click) = "onChange()"></span>
+    </p>
 
-    titleCase pipe will format the title into a title case.
--->
-<h2>{{title | titleCase}} </h2>  
+    <ul class="nav nav-pills">
+        <li [class.active]="viewMode == 'ngFor'"><a (click)="viewMode = 'ngFor'">ngFor</a></li>
+        <li [class.active]="viewMode == 'hidingElement'"><a (click)="viewMode = 'hidingElement'">hiding element</a></li>
+        <li [class.active]="viewMode == 'customPipe'"><a (click)="viewMode = 'customPipe'">Custom Pipe</a></li>
+        <li [class.active]="viewMode == 'eventHandling'"><a (click)="viewMode = 'eventHandling'">Event Handling</a></li>
+        <li [class.active]="viewMode == 'safeTraversalOperator'"><a (click)="viewMode = 'safeTraversalOperator'">Safe Traversal Operator</a></li>
+    </ul>   
+    <div [ngSwitch]="viewMode">
+   
+        <div *ngSwitchCase="'ngFor'">
+             <!--
+                shotcut 'ul>li' and press tab
+                * tells the Html that ngFor is a angular directive
+                *ng= "let item of array"
 
-<!--
-    shotcut 'ul>li' and press tab
+                Add Item: The button will call addItem function
+                X : The button will call delete fucntion
+            -->
+            <h1>ngFor</h1>
+            <button class="btn btn-outline-success" (click)= "addItem()">Add Item</button>
+            <ul>
+                <li *ngFor="let item of items">
+                    {{item}} <button class="btn btn-outline-dark" (click)="deleteItem(item)">X</button>
+                </li>
+            </ul>
+        </div>
+        
+        <div *ngSwitchCase="'customPipe'">
+            <!--
+                Created a custom pipe:
+                    command : 'ng g p title-case'
+                    return: 'title-case.pipe.spect.ts' and 'title-case.pipe.ts' 
+            
+                titleCase pipe will format the title into a title case.
+            -->
+            <h2>Custom Pipe</h2>
+            <p>Enter your Title</p>
+            <input typu = "text" [(ngModel)] = "title" >
+            
+            <h2>{{title | titleCase}} </h2>  
 
-    * tells the Html that ngFor is a angular directive
-    *ng= "let item of array"
--->
-<ul>
-    <li *ngFor="let fr of friedRice">
-        {{fr}}
-    </li>
-</ul>
-<!--Event binding 
-    enterClicked function only be called when enter key is pressed
-    Template Variables: #name.value gets the value of the input field
--->
-<input #name (keyup.enter)="enterClicked(name.value)" style="margin-right:10px"/> 
+        </div>
+        <div *ngSwitchCase="'eventHandling'">
+            <h1>Event Handding</h1>
+            <!--Event binding 
+                enterClicked function only be called when enter key is pressed
+                Template Variables: #name.value gets the value of the input field
+            -->
+            <input #name (keyup.enter)="enterClicked(name.value)" style="margin-right:10px" placeholder="Enter your name"/> 
+            
+            <!-- Two way binding
+                 import @angular/forms as FormsModule into 'app.module.ts' as 'import { FormsModule} from '@angular/forms';'
+                 adding FormsModule into 'imports[]' as 'imports['xxxx','xxxxx','FormsModule']'
+                 Pros: avoiding passing value by function. and shotter our code.
+            -->
+            <br>
+            <input [(ngModel)]="email" (keyup.enter)="enterClickedTwoWayBinding()" style="margin-right:10px" placeholder="Enter your Email"/> 
+            
+            <!--Setting the button style as btn-primary from bootstrap.css. 
+                Style binding: setting the button background to yellow if 'isActive' is true otherwise blue.  
+                Event binding: calling 'onChange' function when button is clicked
+            -->
+            <br>
+            <button class="btn btn-primary" [style.backgroundColor]="isActive ? 'green':'blue'" (click)="onChange()">
+                Change
+            </button>
+        </div>
+        <div *ngSwitchCase="'hidingElement'">
+            <h1>Hiding element</h1>
+            <h2>*ngIf</h2>
+            <!--
+                ngIf can be used to show specific html tab within the condition.
+                Pros: When using ngIf, the none show html tab will no show on the DOM too 
+                if menu list is no empty, shows #itemList, otherwise shows emptyItemList
+            -->
+            <div *ngIf="menu.length > 0; then itemList else emptyItemList"></div>
+            
+            <ng-template #itemList>
+                list of items from menu..    
+            </ng-template>  
+            <ng-template #emptyItemList>
+                Menu is empty ..
+            </ng-template>
+            
+            <h2>Hidden Property</h2>
+            <!--
+                Hidden Property: can be used to hide html tab from the page, however, the hidden tab 
+                will still show on the DOM.
+                The element will show when condition of hidden is false.
+            -->
+            <div [hidden] = "menu.length == 0">
+                list of items from menu..   
+            </div>
+            <div [hidden] = "menu.length > 0">
+                Menu is empty .. 
+            </div>
+        </div>
+        <div *ngSwitchCase="'safeTraversalOperator'">
+            <!--
+                The sfae Traversal Operator (?) helps prevent error when food object is null
+            -->
+            <ul>
+                <li *ngFor="let food of menu">
+                    {{food?.itemName}} {{food?.itemPrice}} 
+                </li>
+            </ul>
+        </div>
+        <div *ngSwitchCase="'list'">List View</div>
+    </div>
+    
+    
 
-<!-- Two way binding
-     import @angular/forms as FormsModule into 'app.module.ts' as 'import { FormsModule} from '@angular/forms';'
-     adding FormsModule into 'imports[]' as 'imports['xxxx','xxxxx','FormsModule']'
-     Pros: avoiding passing value by function. and shotter our code.
--->
-<input [(ngModel)]="email" (keyup.enter)="enterClickedTwoWayBinding()" style="margin-right:10px"/> 
-
-<!--Setting the button style as btn-primary from bootstrap.css. 
-    Style binding: setting the button background to yellow if 'isActive' is true otherwise blue.  
-    Event binding: calling 'onChange' function when button is clicked
--->
-<button class="btn btn-primary" [style.backgroundColor]="isActive ? 'yellow':'blue'" (click)="onChange()">
-    Change
-</button>
-
-
+</body>
+</html>

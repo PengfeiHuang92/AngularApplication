@@ -1,5 +1,6 @@
 import { menuServices } from './../menu.service';
 import { Component } from '@angular/core';
+import { SpawnOptions } from 'child_process';
 
 @Component({
   selector: 'app-menu',
@@ -9,13 +10,15 @@ import { Component } from '@angular/core';
 
 export class MenuComponent  {
    title = "";
-   friedRice;
-   isActive = false; //used for event handling
+   menu;
+   isActive = false; //used for event handling 
    email = "" ; //used for two-way binding
+   viewMode ="map"; 
+   items = ["Item1","Item2","Item3"];
    constructor(menuS : menuServices){ //dependency injection
     //dependency injection: injecting or providing the dependencies of a class into the constructor
     //Pros: We donot need to manuly change the code if we dicide to add paramters to the menuServices services
-     this.friedRice = menuS.getMenu();
+     this.menu = menuS.getMenu();
    }
  
 
@@ -32,4 +35,14 @@ export class MenuComponent  {
     //All code above can be replaced by one line code
     this.isActive = !this.isActive;
    }
+   addItem(){
+    this.items.push("item " + (this.items.length+1));
+   }
+   deleteItem(item:string){
+    let index = this.items.indexOf(item);
+    this.items.splice(index,1);
+   }
+ 
+   
+  
 }
