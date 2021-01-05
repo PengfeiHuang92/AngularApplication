@@ -31,6 +31,7 @@
         <li [class.active]="viewMode == 'customPipe'"><a (click)="viewMode = 'customPipe'">Custom Pipe</a></li>
         <li [class.active]="viewMode == 'eventHandling'"><a (click)="viewMode = 'eventHandling'">Event Handling</a></li>
         <li [class.active]="viewMode == 'safeTraversalOperator'"><a (click)="viewMode = 'safeTraversalOperator'">Safe Traversal Operator</a></li>
+        <li [class.active]="viewMode == 'contactForm'"><a (click)="viewMode='contactForm'">Contact Form</a></li>
     </ul>   
     <div [ngSwitch]="viewMode">
    
@@ -132,10 +133,16 @@
                 </li>
             </ul>
         </div>
+
+        <div *ngSwitchCase="'contactForm'">
+            <contact-form></contact-form>
+           
+        </div>
+
         <div *ngSwitchCase="'list'">List View</div>
     </div>
     
-    
 
+    
 </body>
 </html>

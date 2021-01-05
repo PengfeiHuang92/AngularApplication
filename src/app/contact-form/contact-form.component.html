@@ -1,0 +1,63 @@
+<form #f="ngForm" (ngSubmit)="submit(f.value)">
+    
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input  required
+        type="text" 
+        id="firstName"
+        class="form-control" 
+        ngModel name="firstName" 
+        #firstName="ngModel" >
+        <div class="alert alert-danger" *ngIf="firstName.touched && firstName.invalid">
+            First name is invalid!</div>
+    </div>
+
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input  required
+        type="text" 
+        id="lastName"
+        class="form-control" 
+        ngModel name="lastName" 
+        #lastName="ngModel"  >
+        <div class="alert alert-danger" *ngIf="lastName.touched && lastName.invalid">
+            First name is invalid!</div>
+    </div>
+
+    <div class="form-group">
+        <label for="cardNumber">Card Number</label>
+        <input required
+        type="text"
+        id="cardNumber" 
+        class="form-control"
+        ngModel name="cardNumber"
+        #cardNumber="ngModel"
+        minlength = "13"
+        maxlength = "16"
+        (change)="isDigits(cardNumber.value)"
+        >
+        <div *ngIf="cardNumber.touched && !isNum" class="alert alert-danger">
+            Card Number must be numbers only
+        </div>
+
+        <div *ngIf="cardNumber.touched && cardNumber.invalid" class="alert alert-danger">
+            <div *ngIf="cardNumber.errors.required">
+                Card Number field is required.</div>
+            <div *ngIf="cardNumber.errors.minlength">
+                Card Number field should be at least {{ cardNumber.errors.minlength.requiredLength }} characters.</div>
+        </div>
+        
+        <div class="form-group" >
+            <label >
+                <input ngModel id="oneDayShipping" name="shippingType" type="radio" value="1"> 
+                One-day Shipping
+            </label>
+            <label>
+                <input ngModel id="standardShipping" name="shippingType" type="radio" value="2">
+                 Standard Shipping
+            </label>
+        </div>
+        <p> {{f.value | json}}</p>
+    </div>
+    <button class="btn btn-primary" [disabled]="f.invalid" >Submit</button>
+</form>

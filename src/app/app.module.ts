@@ -6,12 +6,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { TitleCasePipe } from './title-case.pipe';
+import { ContactFormComponent } from './contact-form/contact-form.component';
+import { NewCourseFormComponent } from './new-course-form/new-course-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
-    TitleCasePipe
+    TitleCasePipe,
+    ContactFormComponent,
+    NewCourseFormComponent
   ],
   imports: [
     BrowserModule,
