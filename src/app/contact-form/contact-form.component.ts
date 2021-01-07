@@ -7,11 +7,12 @@ import { Component } from '@angular/core';
 })
 export class ContactFormComponent  {
   isNum = false; 
+  phoneNumber : any;
   submit(x:any){console.log(x);}
 
   //Setting isNum to True when cardNumber contains only numbers, otherwise false.
   isDigits(cardNumber:any){
     this.isNum = /^\d+$/.test(cardNumber); 
   }
-
+  
 }

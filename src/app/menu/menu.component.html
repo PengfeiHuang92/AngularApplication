@@ -32,6 +32,8 @@
         <li [class.active]="viewMode == 'eventHandling'"><a (click)="viewMode = 'eventHandling'">Event Handling</a></li>
         <li [class.active]="viewMode == 'safeTraversalOperator'"><a (click)="viewMode = 'safeTraversalOperator'">Safe Traversal Operator</a></li>
         <li [class.active]="viewMode == 'contactForm'"><a (click)="viewMode='contactForm'">Contact Form</a></li>
+        <li [class.active]="viewMode == 'signupForm'"><a (click)="viewMode='signupForm'">Sign Up Form</a></li>
+        
     </ul>   
     <div [ngSwitch]="viewMode">
    
@@ -134,11 +136,17 @@
             </ul>
         </div>
 
+   
         <div *ngSwitchCase="'contactForm'">
+            <h2>Contact Form</h2>
             <contact-form></contact-form>
-           
         </div>
 
+        <div *ngSwitchCase="'signupForm'">
+            <h2>Sign-up Form</h2>
+            <signup-form></signup-form>
+        </div>
+        
         <div *ngSwitchCase="'list'">List View</div>
     </div>
     

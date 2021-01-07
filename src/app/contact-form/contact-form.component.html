@@ -1,3 +1,13 @@
+<!--
+    Template-driven form
+
+    fields : 
+    Fist Name: required.
+    Last Name: required.a
+    Phone Number: must be number with 10 or 11 digits.
+    Submit button: only enable when all the required meet.
+
+-->
 <form #f="ngForm" (ngSubmit)="submit(f.value)">
     
     <div class="form-group">
@@ -21,30 +31,31 @@
         ngModel name="lastName" 
         #lastName="ngModel"  >
         <div class="alert alert-danger" *ngIf="lastName.touched && lastName.invalid">
-            First name is invalid!</div>
+            Last name is invalid!</div>
     </div>
 
     <div class="form-group">
-        <label for="cardNumber">Card Number</label>
+        <label for="phoneNumber">Phone Number</label>
         <input required
         type="text"
-        id="cardNumber" 
+        id="phoneNumber" 
         class="form-control"
-        ngModel name="cardNumber"
-        #cardNumber="ngModel"
-        minlength = "13"
-        maxlength = "16"
-        (change)="isDigits(cardNumber.value)"
+        ngModel name="phoneNumber"
+        #phoneNumber="ngModel"
+        minlength = "10"
+        maxlength = "11"
+        (change)="isDigits(phoneNumber.value)"
         >
-        <div *ngIf="cardNumber.touched && !isNum" class="alert alert-danger">
-            Card Number must be numbers only
+
+        <div *ngIf="phoneNumber.touched && !isNum" class="alert alert-danger">
+            Phone Number must be numbers only
         </div>
 
-        <div *ngIf="cardNumber.touched && cardNumber.invalid" class="alert alert-danger">
-            <div *ngIf="cardNumber.errors.required">
-                Card Number field is required.</div>
-            <div *ngIf="cardNumber.errors.minlength">
-                Card Number field should be at least {{ cardNumber.errors.minlength.requiredLength }} characters.</div>
+        <div *ngIf="phoneNumber.touched && phoneNumber.invalid" class="alert alert-danger">
+            <div *ngIf="phoneNumber.errors?.required">
+                Phone Number field is required.</div>
+            <div *ngIf="phoneNumber.errors?.minlength">
+                Phone Number field should be at least {{ phoneNumber.errors?.minlength.requiredLength }} characters.</div>
         </div>
         
         <div class="form-group" >
@@ -52,6 +63,7 @@
                 <input ngModel id="oneDayShipping" name="shippingType" type="radio" value="1"> 
                 One-day Shipping
             </label>
+            <br>
             <label>
                 <input ngModel id="standardShipping" name="shippingType" type="radio" value="2">
                  Standard Shipping
