@@ -5,15 +5,56 @@
 <form [formGroup]="form">
     <div class="form-group">
         <label for="userName">User Name</label>
-        <input formControlName="username" id="userName"type="text" class="form-control" value="">
+        <input formControlName="username" id="userName"type="text" class="form-control">
+        <!--
+            Message showing only if username is pending,
+            which means there is at least one asynchronous function is working  
+        -->
+        <div *ngIf="username?.pending">Checking for uniqyebess...</div>
+        <!--
+            Error message showing only if username does not meet all the requires.
+                .Username is required
+                .Username can not contain space
+                .Username should be longer than minimum length
+                .Username should be unique
+        -->
         <div *ngIf="username?.touched && username?.invalid" class="alert alert-danger">
             <div *ngIf="username?.errors?.required"> User Name is required </div>
+            <div *ngIf="username?.errors?.noneSpace"> User Name can not contain space </div>
             <div *ngIf="username?.errors?.minlength"> User name should be minimum {{username?.errors?.minlength.requiredLength}}</div>
+            <div *ngIf="username?.errors?.shouldbeUnique">User name is already taken</div>
         </div>
     </div>
     <div class="form-group">
         <label for="password">Password</label>
-        <input formControlName="password" id="password" type="text" class="form-control" value="">
-        <div *ngIf="password?.touched && password?.invalid" class="alert alert-danger">Password is required</div>
+        <input formControlName="password" id="password" type="password" class="form-control" >
+        <!--
+            Error message shows only if password does not meet all the requires.
+                .Password is required
+                .Password can not contain space
+                .Password shuold be longer than minimum length
+
+        -->
+        <div *ngIf="password?.touched && password?.invalid" class="alert alert-danger">
+            <div *ngIf="password?.errors?.required">Password is required</div>
+            <div *ngIf="password?.errors?.noneSpace">Password can not contain space</div>
+            <div *ngIf="password?.errors?.minlength">Password shuold be minimum {{password?.errors?.minlength.requiredLength}}</div>
+        </div>
     </div>
+    <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input formControlName="confirmPassword" id="confirmPassword" type="password" class="form-control">
+        <!--
+            Error message shows only if confirm password does not meet all the requires.
+                .Confirm Password is required
+                .Confirm Password must match the password
+        -->
+        <div *ngIf="confirmPassword?.touched && confirmPassword?.invalid" class="alert alert-danger">
+            <div *ngIf="confirmPassword?.errors?.required">Confirm Password is required</div>
+        </div>
+        <div *ngIf="form.invalid && form?.errors?.passwordShouldMatch && confirmPassword?.valid" class="alert alert-danger" >
+            Password does not match
+        </div>
+    </div>
+    <button class="btn btn-primary">Sign up</button>
 </form>
