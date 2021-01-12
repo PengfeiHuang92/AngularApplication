@@ -9,6 +9,7 @@ import { FormGroup, FormControl, Validators, FormBuilder, FormArray} from '@angu
   styleUrls: ['./signup-form.component.css']
 })
 export class SignupFormComponent  {
+  result:any; //output the result from sign up form
 //-----------------------------------------------------------
   //form = new FormGroup({
     // Single validator
@@ -69,6 +70,9 @@ export class SignupFormComponent  {
   //   });
   // }
 
+  submit(){
+    this.result = this.form.value; 
+  }
 
   //Properties username
   get username(){
@@ -82,5 +86,5 @@ export class SignupFormComponent  {
   get confirmPassword(){
     return this.form.get('confirmPassword');
   }
-  log(x:any){console.log(x);}
+  
 }

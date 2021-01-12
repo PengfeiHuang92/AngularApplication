@@ -2,7 +2,7 @@
     Reactive Forms
     prerequest: ReactiveFormsModule must be import into app.module.ts
 -->
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="submit()">
     <div class="form-group">
         <label for="userName">User Name</label>
         <input formControlName="username" id="userName"type="text" class="form-control">
@@ -10,7 +10,7 @@
             Message showing only if username is pending,
             which means there is at least one asynchronous function is working  
         -->
-        <div *ngIf="username?.pending">Checking for uniqyebess...</div>
+        <div *ngIf="username?.pending">Checking for uniqueness...</div>
         <!--
             Error message showing only if username does not meet all the requires.
                 .Username is required
@@ -56,5 +56,9 @@
             Password does not match
         </div>
     </div>
-    <button class="btn btn-primary">Sign up</button>
+    <!--
+        Submit buttom disable when form is invalid and the username is on pending
+    -->
+    <button [disabled]="form.invalid || username?.pending" class="btn btn-primary">Sign up</button>
+    <p>{{result| json}}</p>
 </form>
