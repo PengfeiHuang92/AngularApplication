@@ -33,7 +33,8 @@
         <li [class.active]="viewMode == 'safeTraversalOperator'"><a (click)="viewMode = 'safeTraversalOperator'">Safe Traversal Operator</a></li>
         <li [class.active]="viewMode == 'contactForm'"><a (click)="viewMode='contactForm'">Contact Form</a></li>
         <li [class.active]="viewMode == 'signupForm'"><a (click)="viewMode='signupForm'">Sign Up Form</a></li>
-        
+        <li [class.active]="viewMode == 'serverCommunication'"><a (click)="viewMode='serverCommunication'">Server Communication</a></li>
+       
     </ul>   
     <div [ngSwitch]="viewMode">
    
@@ -147,7 +148,10 @@
             <signup-form></signup-form>
         </div>
         
-        <div *ngSwitchCase="'list'">List View</div>
+        <div *ngSwitchCase="'serverCommunication'">
+            <h2>Server Communication</h2>
+            <posts></posts>
+        </div>
     </div>
     
 

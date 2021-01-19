@@ -1,4 +1,7 @@
-import { menuServices } from './menu.service';
+import { AppErrorHandler } from './app-error-handler';
+import { ErrorHandler } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { menuServices } from './services/menu.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -8,6 +11,8 @@ import { MenuComponent } from './menu/menu.component';
 import { TitleCasePipe } from './title-case.pipe';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
+import { PostService } from './services/post.service';
+import { PostsComponent } from './posts/posts.component';
 
 @NgModule({
   declarations: [
@@ -15,15 +20,24 @@ import { SignupFormComponent } from './signup-form/signup-form.component';
     MenuComponent,
     TitleCasePipe,
     ContactFormComponent,
-    SignupFormComponent
+    SignupFormComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [menuServices],
+  providers: [
+    menuServices,
+    PostService,
+    {
+      provide:ErrorHandler,
+      useClass:AppErrorHandler
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-import { menuServices } from './../menu.service';
+import { menuServices } from '../services/menu.service';
 import { Component } from '@angular/core';
 
 
