@@ -13,7 +13,8 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { PostService } from './services/post.service';
 import { PostsComponent } from './posts/posts.component';
-
+import { NavigationbarComponent } from './navigationbar/navigationbar.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,14 +22,16 @@ import { PostsComponent } from './posts/posts.component';
     TitleCasePipe,
     ContactFormComponent,
     SignupFormComponent,
-    PostsComponent
+    PostsComponent,
+    NavigationbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [
     menuServices,

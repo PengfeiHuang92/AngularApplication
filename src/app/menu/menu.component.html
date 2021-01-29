@@ -34,6 +34,7 @@
         <li [class.active]="viewMode == 'contactForm'"><a (click)="viewMode='contactForm'">Contact Form</a></li>
         <li [class.active]="viewMode == 'signupForm'"><a (click)="viewMode='signupForm'">Sign Up Form</a></li>
         <li [class.active]="viewMode == 'serverCommunication'"><a (click)="viewMode='serverCommunication'">Server Communication</a></li>
+        <li [class.active]="viewMode == 'navigationbar'"><a (click)="viewMode='navigationbar'">Navigation Bar</a></li>
        
     </ul>   
     <div [ngSwitch]="viewMode">
@@ -152,6 +153,11 @@
             <h2>Server Communication</h2>
             <posts></posts>
         </div>
+        <div *ngSwitchCase="'navigationbar'">
+            <h2>Navigation Bar</h2>
+            <navigationbar></navigationbar>   
+        </div>
+        
     </div>
     
 

@@ -19,11 +19,7 @@ export class PostsComponent implements OnInit{
   //HTTP request : Get => Get data
   ngOnInit(): void {
     this.service.getAll()
-    .subscribe(
-      (response) =>{
-
-      this.posts = response;
-    });
+    .subscribe( response=> this.posts = response);
   }
 
   //HTTP request : Post => Creast data
@@ -33,9 +29,6 @@ export class PostsComponent implements OnInit{
     this.service.createPost(post)
     .subscribe(
       response =>{
-      // console.log(response);
-      // post['id'] = response.jason().id;
-    
       this.posts.splice(0,0,post);
     },
      (error: Response) => {
@@ -50,10 +43,7 @@ export class PostsComponent implements OnInit{
   //HTTP request: Put => Update data
   updatePost(post:any){
     this.service.updatePost(post) 
-    .subscribe(
-      response =>{
-      console.log(response);
-    });
+    .subscribe( response =>console.log(response));
   }
 
   //HTTP request: Delete => Delete data
